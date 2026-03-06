@@ -19,7 +19,7 @@ How to run the game:
 1. Download or clone the project files.
 2. Open terminal and navigate to the project folder.
 3. Run the script using: python guess_the_number.py
-4. The game will guide you through what to do
+4. The game will guide you through what to do.
 
 NOTE: The secret number is within the range 1-100
 
@@ -36,12 +36,15 @@ Features:
 - Option to play again
 - Option to play as new player
 - Leaderboard tracking total score, games played and fewest guesses per player
+- Leaderboard saved to .json file
+- Local leaderbord.json allows local leaderboard to be maintained across multiple runs
 
 ----------------------------------------------------------------------------------------------------------
 
 
 Future Improvements
 
-- Allow the leaderboard to be saved when script ends and reloaded in when script restarts
+- Run in a webpage rather than console
+- Full GUI
 
 

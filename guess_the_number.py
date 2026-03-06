@@ -1,6 +1,5 @@
 import random
-
-leaderboard = {}
+import json
 
 def check_guess(secret_number): 
         '''Loop to guess input and check against secret number'''        
@@ -31,7 +30,22 @@ def display_leaderboard(leaderboard):
             leaderboard[player]["total_score"],
             leaderboard[player]["fewest_guesses"],
             leaderboard[player]["games_played"]))
-        
+
+def load_leaderboard():
+    '''Searches for leaderboard file - loads if found - if not leaderboard is blank'''
+    try:
+        with open("leaderboard.json", "r") as leaderboard_file:
+            return json.load(leaderboard_file)
+    except FileNotFoundError:
+        return {}
+
+def save_leaderboard(leaderboard):
+    '''Saves the leaderboard to .json to be opened next time the script runs'''
+    with open ("leaderboard.json", "w") as leaderboard_file:
+        json.dump(leaderboard, leaderboard_file, indent=2)
+
+leaderboard = load_leaderboard()
+       
 while True:
     player_name = input("Enter Name: ")
 
@@ -78,6 +92,9 @@ while True:
             if leaderboard[player_name]["fewest_guesses"] is None or guesses_used < leaderboard[player_name]["fewest_guesses"]:
                 leaderboard[player_name]["fewest_guesses"] = guesses_used
 
+        save_leaderboard(leaderboard)
+        display_leaderboard(leaderboard)
+
 
         play_again = input("Play Again? (y/n): ").lower()
         while play_again != "y" and play_again != "n":
@@ -87,8 +104,6 @@ while True:
         if play_again == "n":
             print("Thanks for Playing %s!" %player_name)
             break
-
-    display_leaderboard(leaderboard)
         
     new_player = input("New Player? (y/n): ").lower()
         
@@ -98,5 +113,4 @@ while True:
 
     if new_player == "n":
         print("Thanks for Playing!")
-        print("Note: Leaderboard Cleared")
         break
